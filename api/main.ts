@@ -58,7 +58,7 @@ async function bootstrap() {
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup("docs", app, document);
-  await app.listen(8443);
+  await app.listen(8443, '0.0.0.0');
   // #TODO delete bot start command
   console.log(`Application is running on: ${await app.getUrl()}`);
 }
