@@ -7,6 +7,7 @@ setInterval(async () => {
             method: "GET",
             url: process.env.API_URL
         })
+        console.log('foo')
     } catch (e) {
     }
 }, 10000)
