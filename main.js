@@ -4,7 +4,7 @@ dotenv.config()
 setInterval(async () => {
     try {
         await axios({
-            method: "GET",
+            method: "POST",
             url: process.env.API_URL + '/checkouts/check'
         })
     } catch (e) {
