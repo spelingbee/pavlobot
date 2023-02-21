@@ -20,7 +20,7 @@ import { MulterModule } from "@nestjs/platform-express";
 @Module({
   imports: [
     ConfigModule.forRoot({
-      envFilePath: [`.${process.env.NODE_ENV}.env`],
+      envFilePath: [`.env`],
       isGlobal: true,
     }),
     ServeStaticModule.forRoot({
