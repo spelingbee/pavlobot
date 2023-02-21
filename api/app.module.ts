@@ -19,7 +19,10 @@ import { CurrenciesModule } from "./currencies/currencies.module";
 import { MulterModule } from "@nestjs/platform-express";
 @Module({
   imports: [
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({
+      envFilePath: [`.${process.env.NODE_ENV}.env`],
+      isGlobal: true,
+    }),
     ServeStaticModule.forRoot({
       rootPath: resolve(__dirname, "../client"),
     }),
