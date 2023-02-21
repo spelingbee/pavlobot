@@ -11,7 +11,7 @@ import { ValidationPipe } from "@nestjs/common";
 import { AuthGuard } from "./auth/auth.guard";
 import * as process from "process";
 import {SchedulesService} from "./schedules/schedules.service";
-
+console.log(process.env)
 const myBot = new Bot(process.env.BOT_TOKEN);
 myBot.hears("Айжан", async (ctx) => {
   await ctx.reply("Самая красивая девушка на свете, и самая лучшая");
