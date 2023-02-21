@@ -1,24 +1,15 @@
-import { NestFactory } from "@nestjs/core";
+import { NestFactory, Reflector } from "@nestjs/core";
 import { AppModule } from "./app.module";
 import { NestExpressApplication } from "@nestjs/platform-express";
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 import { MyLogger } from "./logger/logger.service";
 import { CheckoutsService } from "./checkouts/checkouts.service";
 import { Bot } from "grammy";
-import axios from "axios";
 import { OrdersService } from "./orders/orders.service";
 import { UsersService } from "./users/users.service";
-import { StatusEnum } from "./users/enums/status.enum";
 import { ValidationPipe } from "@nestjs/common";
-import { TypeEnum } from "./transactions/enums/type.enum";
-import { getDate } from "./utils/getDate";
-import { Order } from "./orders/entities/order.entity";
 import { AuthGuard } from "./auth/auth.guard";
-import { getProductInfo } from "./utils/getProductInfo";
-import { getRules } from "./utils/getRules";
 import * as process from "process";
-import { SchedulesService } from "./schedules/schedules.service";
-import dayjs from "dayjs";
 
 const myBot = new Bot(process.env.BOT_TOKEN);
 myBot.hears("Айжан", async (ctx) => {
@@ -48,7 +39,7 @@ async function bootstrap() {
       ],
     },
   });
-  app.useGlobalGuards(new AuthGuard());
+  app.useGlobalGuards(new AuthGuard(new Reflector()));
   app.useGlobalPipes(new ValidationPipe());
   const checkoutsService: CheckoutsService = app.get(CheckoutsService);
   const ordersService: OrdersService = app.get(OrdersService);

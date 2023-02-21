@@ -2,11 +2,17 @@ import { CanActivate, ExecutionContext, Injectable } from "@nestjs/common";
 import { Observable } from "rxjs";
 import * as crypto from "crypto";
 import * as process from "process";
+import { Reflector } from "@nestjs/core";
 @Injectable()
 export class AuthGuard implements CanActivate {
+  constructor(private reflector: Reflector) {}
   canActivate(
     context: ExecutionContext
   ): boolean | Promise<boolean> | Observable<boolean> {
+    const allowUnauthorizedRequest = this.reflector.get<boolean>(
+      "isPublic",
+      context.getHandler()
+    );
     const request = context.switchToHttp().getRequest();
     if (!request.headers.user && !request.headers.user_hash) {
       return true;
@@ -29,6 +35,6 @@ export class AuthGuard implements CanActivate {
       .createHmac("sha256", key)
       .update(dataCheckArr.join("\n"))
       .digest("hex");
-    return validateHash === hash;
+    return validateHash === hash || allowUnauthorizedRequest;
   }
 }
