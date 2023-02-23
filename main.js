@@ -10,4 +10,4 @@ setInterval(async () => {
     } catch (e) {
         console.log(e)
     }
-}, 10000)
+}, 2000)
