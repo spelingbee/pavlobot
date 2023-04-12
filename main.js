@@ -1,5 +1,6 @@
 import axios from "axios";
 import * as dotenv from 'dotenv'
+import http from 'http'
 dotenv.config()
 setInterval(async () => {
     try {
@@ -11,3 +12,9 @@ setInterval(async () => {
         console.log(e)
     }
 }, 2000)
+
+http.createServer(function (req, res) {
+    res.writeHead(200, {'Content-Type': 'text/plain'});
+    res.write('Hello World!');
+    res.end();
+}).listen(8080, '0.0.0.0');
