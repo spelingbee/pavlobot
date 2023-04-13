@@ -8,11 +8,11 @@ WORKDIR .
 # where available (npm@5+)
 COPY package*.json ./
 
-RUN npm install \
+RUN npm install
 # If you are building your code for production
 # RUN npm ci --omit=dev
-EXPOCE 8080
 # Bundle app source
 COPY . .
+EXPOSE 8080
 
 CMD [ "node", "main.js" ]
