@@ -43,7 +43,7 @@ socket.addEventListener("message", (event) => {
         headers: {
             'Content-Type': 'application/json',
         }
-    })
+    }).catch(e => {console.log(e.response)})
 });
 
 socket.addEventListener("close", (event) => {
