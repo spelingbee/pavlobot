@@ -62,7 +62,7 @@ socket.addEventListener("error", (error) => {
     console.error("Произошла ошибка:", error);
 });
 setInterval(() => {
-    console.log(1)
+    axios.get('https://ringo-wuqf.onrender.com').then(res => console.log(res)).catch(e => {console.log(e)})
 }, 60000)
 http.createServer(function (req, res) {
     res.writeHead(200, {'Content-Type': 'text/plain'});
