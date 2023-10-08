@@ -23,7 +23,7 @@ socket.addEventListener("message", (event) => {
                 createdDate: item.dt
             }
         })
-    } else if (type === 'factors') {
+    } else if (type === 'factors' && false) {
         if (first[0]) {
             fetchData = data.at(-1)
 
@@ -37,13 +37,15 @@ socket.addEventListener("message", (event) => {
         url = '/socket-round'
     }
     url = `https://ringo-inky.vercel.app/ringo${url}`
-    axios(url, {
-        method: 'POST',
-        data: fetchData,
-        headers: {
-            'Content-Type': 'application/json',
-        }
-    }).catch(e => {console.log(e.response)})
+    if (type !== 'factors') {
+        axios(url, {
+            method: 'POST',
+            data: fetchData,
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        }).catch(e => {console.log(e.response)})
+    }
 });
 
 socket.addEventListener("close", (event) => {
