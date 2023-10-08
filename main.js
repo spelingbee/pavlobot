@@ -16,30 +16,30 @@ socket.addEventListener("message", (event) => {
     let fetchData = null
     let url = ''
     if (type === 'last-results') {
-        fetchData = JSON.stringify(data.map(item => {
+        fetchData = data.map(item => {
             return {
                 value: item.v,
                 position: item.c,
                 createdDate: item.dt
             }
-        }))
+        })
     } else if (type === 'factors') {
         if (first[0]) {
-            fetchData = JSON.stringify(data.at(-1))
+            fetchData = data.at(-1)
 
         } else {
-            fetchData = JSON.stringify(data)
+            fetchData = data
             first[0] = true
         }
         url = '/socket-factor'
     } else {
-        fetchData = JSON.stringify(data)
+        fetchData = data
         url = '/socket-round'
     }
     url = `https://ringo-inky.vercel.app/ringo${url}`
-    fetch(url, {
+    axios(url, {
         method: 'POST',
-        body: fetchData,
+        data: fetchData,
         headers: {
             'Content-Type': 'application/json',
         }
