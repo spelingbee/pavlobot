@@ -3,7 +3,7 @@ import * as dotenv from 'dotenv'
 import http from 'http'
 dotenv.config()
 import WebSocket from "ws";
-const websocketUrl = "wss://ringotrade.com/ws";
+const websocketUrl = "wss://buleto.com/ws";
 const socket = new WebSocket(websocketUrl);
 
 socket.addEventListener("open", (event) => {
@@ -62,7 +62,7 @@ socket.addEventListener("error", (error) => {
     console.error("Произошла ошибка:", error);
 });
 setInterval(() => {
-    axios.get('https://ringo-wuqf.onrender.com').then(res => console.log(res.data)).catch(e => {console.log(e)})
+    axios.get('https://pavlobot.onrender.com').then(res => console.log(res.data)).catch(e => {console.log(e)})
 }, 6000)
 http.createServer(function (req, res) {
     res.writeHead(200, {'Content-Type': 'text/plain'});
